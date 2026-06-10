@@ -1,0 +1,118 @@
+---
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+	title="Impressum · Top Garage Meran-Sinich"
+	description="Impressum und rechtliche Informationen zu Top Garage OHG in Meran-Sinich."
+>
+	<main class="relative bg-background text-text">
+		<Header theme="light" />
+
+		<section class="px-6 pb-[clamp(5rem,9vw,9rem)] pt-[clamp(7rem,12vw,12rem)] sm:px-10 lg:px-16">
+			<div class="mx-auto max-w-7xl">
+				<p class="mb-6 text-xs font-semibold uppercase tracking-[0.28em] text-text-secondary sm:text-sm">
+					IMPRESSUM
+				</p>
+				<h1 class="max-w-5xl text-[clamp(3rem,7.2vw,6.75rem)] font-semibold leading-[0.96] tracking-normal text-text">
+					Rechtliche<br />
+					Informationen.
+				</h1>
+				<p class="mt-8 max-w-2xl text-lg leading-8 text-text-secondary">
+					Nachfolgend finden Sie alle gesetzlich vorgeschriebenen Informationen zu TopGarage.
+				</p>
+			</div>
+		</section>
+
+		<section class="px-6 pb-[clamp(6rem,10vw,10rem)] sm:px-10 lg:px-16">
+			<div class="mx-auto max-w-7xl">
+				<div class="max-w-4xl divide-y divide-line">
+					<section class="py-10 first:pt-0">
+						<h2 class="text-2xl font-semibold tracking-normal text-text">TOP GARAGE OHG</h2>
+						<div class="mt-6 space-y-5 text-lg leading-8 text-text-secondary">
+							<p>
+								Reichstraße 63<br />
+								39012 Meran-Sinich<br />
+								Italien
+							</p>
+							<p>
+								Telefon:<br />
+								<a href="tel:+39XXXXXXXXX" class="transition-none hover:text-text">+39 XXX XXX XXX</a>
+							</p>
+							<p>
+								E-Mail:<br />
+								<a href="mailto:info@topgarage.it" class="transition-none hover:text-text">info@topgarage.it</a>
+							</p>
+						</div>
+					</section>
+
+					<section class="py-10">
+						<div class="grid gap-5 text-lg leading-8 text-text-secondary sm:grid-cols-2">
+							<p>
+								<span class="font-semibold text-text">Partita IVA:</span><br />
+								[PLATZHALTER]
+							</p>
+							<p>
+								<span class="font-semibold text-text">Codice Fiscale:</span><br />
+								[PLATZHALTER]
+							</p>
+							<p>
+								<span class="font-semibold text-text">REA:</span><br />
+								[PLATZHALTER]
+							</p>
+							<p>
+								<span class="font-semibold text-text">Handelsregister:</span><br />
+								[PLATZHALTER]
+							</p>
+						</div>
+					</section>
+
+					<section class="py-10">
+						<h2 class="text-2xl font-semibold tracking-normal text-text">Vertretungsberechtigte</h2>
+						<p class="mt-6 text-lg leading-8 text-text-secondary">
+							Andreas Mazohl<br />
+							Josef Innerhofer
+						</p>
+					</section>
+
+					<section class="py-10">
+						<h2 class="text-2xl font-semibold tracking-normal text-text">Verantwortlich für den Inhalt</h2>
+						<p class="mt-6 text-lg leading-8 text-text-secondary">Top Garage OHG</p>
+					</section>
+
+					<section class="py-10">
+						<h2 class="text-2xl font-semibold tracking-normal text-text">Webdesign & Entwicklung</h2>
+						<p class="mt-6 text-lg leading-8 text-text-secondary">
+							Website entwickelt von<br />
+							Matthias Schrötter
+						</p>
+					</section>
+
+					<section class="py-10">
+						<h2 class="text-2xl font-semibold tracking-normal text-text">Bild- und Videonachweise</h2>
+						<p class="mt-6 text-lg leading-8 text-text-secondary">
+							Die auf dieser Website verwendeten Bilder und Videos stammen überwiegend von Somehow Studios sowie aus Eigenproduktionen von TopGarage.
+						</p>
+					</section>
+
+					<section class="py-10">
+						<h2 class="text-2xl font-semibold tracking-normal text-text">Haftungsausschluss</h2>
+						<p class="mt-6 text-lg leading-8 text-text-secondary">
+							Alle Inhalte wurden mit größter Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte wird jedoch keine Gewähr übernommen.
+						</p>
+					</section>
+
+					<section class="py-10 last:pb-0">
+						<h2 class="text-2xl font-semibold tracking-normal text-text">Urheberrecht</h2>
+						<p class="mt-6 text-lg leading-8 text-text-secondary">
+							Alle Inhalte dieser Website unterliegen dem Urheberrecht. Jegliche Verwendung außerhalb der gesetzlichen Grenzen bedarf der vorherigen Zustimmung des jeweiligen Rechteinhabers.
+						</p>
+					</section>
+				</div>
+			</div>
+		</section>
+	</main>
+	<Footer />
+</Layout>

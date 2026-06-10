@@ -1,0 +1,21 @@
+---
+import ContactForm from '../components/ContactForm.astro';
+import ContactHero from '../components/ContactHero.astro';
+import ContactInfo from '../components/ContactInfo.astro';
+import ContactMap from '../components/ContactMap.astro';
+import Footer from '../components/Footer.astro';
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+	title="Kontakt · Top Garage Meran-Sinich"
+	description="Kontakt zu Top Garage in Meran-Sinich: Adresse, Telefon, E-Mail, Öffnungszeiten, Route und Kontaktformular."
+>
+	<main class="bg-background text-text">
+		<ContactHero />
+		<ContactInfo />
+		<ContactForm />
+		<ContactMap />
+	</main>
+	<Footer />
+</Layout>

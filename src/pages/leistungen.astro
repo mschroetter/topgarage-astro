@@ -1,0 +1,20 @@
+---
+import Footer from '../components/Footer.astro';
+import ServicesContactSection from '../components/ServicesContactSection.astro';
+import ServicesGrid from '../components/ServicesGrid.astro';
+import ServicesPageHero from '../components/ServicesPageHero.astro';
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+	title="Leistungen · Top Garage Meran-Sinich"
+	description="Leistungen von Top Garage in Meran-Sinich: KFZ-Service, Karosserie, Autoglas, Reifendienst, Achsvermessung, Revisionscenter und Fahrzeughandel."
+	preloadImage="/images/leistungen-hero.jpg"
+>
+	<main class="bg-background text-text">
+		<ServicesPageHero />
+		<ServicesGrid />
+		<ServicesContactSection />
+	</main>
+	<Footer />
+</Layout>

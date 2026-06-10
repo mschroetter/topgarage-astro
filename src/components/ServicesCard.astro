@@ -1,0 +1,41 @@
+---
+interface Props {
+	title: string;
+	text: string;
+	image: string;
+	width: number;
+	height: number;
+	featured?: boolean;
+}
+
+const { title, text, image, width, height, featured = false } = Astro.props;
+---
+
+<a
+	href="/kontakt"
+	class={`service-card group relative min-h-[360px] overflow-hidden rounded-[32px] bg-[#151515] text-card sm:min-h-[430px] ${featured ? 'lg:col-span-2 lg:min-h-[620px]' : 'lg:min-h-[520px]'}`}
+>
+	<img
+		class="absolute inset-0 h-full w-full object-cover opacity-90 transition-transform duration-[380ms] ease-in-out group-hover:scale-[1.04]"
+		src={image}
+		alt=""
+		loading="eager"
+		width={width}
+		height={height}
+		decoding="async"
+		onerror="this.remove()"
+	/>
+	<div class="absolute inset-0 bg-linear-to-b from-black/5 via-black/20 to-black/85"></div>
+	<div class="absolute bottom-8 left-8 right-8 pr-16 sm:bottom-10 sm:left-10 sm:right-24 sm:pr-0">
+		<h2 class="text-[1.65rem] font-semibold leading-[1.08] tracking-normal sm:text-4xl">
+			{title}
+		</h2>
+		<p class="mt-4 max-w-lg text-base leading-7 text-card/72">{text}</p>
+	</div>
+	<span
+		class="absolute bottom-8 right-8 inline-flex h-12 w-12 items-center justify-center rounded-full bg-card/20 text-xl font-semibold text-card backdrop-blur-sm transition-all duration-[380ms] ease-in-out group-hover:translate-x-1 group-hover:bg-card/28 group-hover:text-card sm:bottom-10 sm:right-10 sm:h-14 sm:w-14 sm:text-2xl"
+		aria-hidden="true"
+	>
+		→
+	</span>
+</a>

@@ -1,0 +1,124 @@
+---
+import logo from '../images/logo.png';
+
+interface Props {
+	theme?: 'dark' | 'light';
+}
+
+const { theme = 'dark' } = Astro.props;
+const navClass =
+	theme === 'dark'
+		? 'hidden items-center gap-9 text-sm font-medium text-card/80 md:flex'
+		: 'hidden items-center gap-9 text-sm font-medium text-text-secondary md:flex';
+const navLinkClass = theme === 'dark' ? 'transition-none hover:text-card' : 'transition-none hover:text-text';
+const buttonClass =
+	theme === 'dark'
+		? 'inline-flex h-10 items-center justify-center rounded-pill border border-card/35 px-5 text-sm font-semibold text-card transition-none hover:border-card/70 hover:bg-card/10 hover:text-card'
+		: 'inline-flex h-10 items-center justify-center rounded-pill border border-text/20 px-5 text-sm font-semibold text-text transition-none hover:border-text/40 hover:bg-text/5 hover:text-text';
+const burgerClass =
+	theme === 'dark'
+		? 'inline-flex h-11 w-11 items-center justify-center rounded-full border border-card/35 text-card md:hidden'
+		: 'inline-flex h-11 w-11 items-center justify-center rounded-full border border-text/20 text-text md:hidden';
+const mobileMenuClass =
+	theme === 'dark'
+		? 'fixed inset-0 z-50 hidden bg-[#050505] px-6 py-8 text-card'
+		: 'fixed inset-0 z-50 hidden bg-background px-6 py-8 text-text';
+const mobileLinkClass =
+	theme === 'dark'
+		? 'block text-[clamp(2.5rem,12vw,4.5rem)] font-semibold leading-[1.02] tracking-normal text-card'
+		: 'block text-[clamp(2.5rem,12vw,4.5rem)] font-semibold leading-[1.02] tracking-normal text-text';
+const mobileButtonClass =
+	theme === 'dark'
+		? 'mt-10 inline-flex h-14 items-center justify-center rounded-pill bg-card px-8 text-sm font-semibold text-text'
+		: 'mt-10 inline-flex h-14 items-center justify-center rounded-pill bg-text px-8 text-sm font-semibold text-card';
+---
+
+<header class="absolute inset-x-0 top-0 z-10 px-6 py-8 sm:px-10 lg:px-16 lg:py-9">
+	<div class="flex items-center justify-between gap-8">
+		<a href="/" class="inline-flex items-center">
+			<img
+				class="h-[24px] w-auto object-contain lg:h-[28px]"
+				src={logo.src}
+				alt="Top Garage Meran-Sinich"
+				width={logo.width}
+				height={logo.height}
+				decoding="async"
+			/>
+		</a>
+		<div class="flex items-center gap-4 sm:gap-7">
+			<nav class={navClass} aria-label="Hauptnavigation">
+				<a href="/leistungen" class={navLinkClass}>Leistungen</a>
+				<a href="/ueber-uns" class={navLinkClass}>Über uns</a>
+				<a href="/kontakt" class={navLinkClass}>Kontakt</a>
+			</nav>
+			<a href="/kontakt" class={`${buttonClass} hidden md:inline-flex`}>
+				Termin
+			</a>
+			<button class={burgerClass} type="button" aria-label="Menü öffnen" aria-expanded="false" data-menu-open>
+				<span class="grid gap-1.5">
+					<span class="block h-px w-5 bg-current"></span>
+					<span class="block h-px w-5 bg-current"></span>
+				</span>
+			</button>
+		</div>
+	</div>
+</header>
+
+<div class={mobileMenuClass} data-mobile-menu>
+	<div class="flex items-center justify-between">
+		<a href="/" class="inline-flex items-center" data-menu-link>
+			<img
+				class="h-[24px] w-auto object-contain"
+				src={logo.src}
+				alt="Top Garage Meran-Sinich"
+				width={logo.width}
+				height={logo.height}
+				decoding="async"
+			/>
+		</a>
+		<button
+			class={theme === 'dark' ? 'inline-flex h-11 w-11 items-center justify-center rounded-full border border-card/35 text-card' : 'inline-flex h-11 w-11 items-center justify-center rounded-full border border-text/20 text-text'}
+			type="button"
+			aria-label="Menü schließen"
+			data-menu-close
+		>
+			<span class="relative block h-5 w-5">
+				<span class="absolute left-0 top-1/2 block h-px w-5 -translate-y-1/2 rotate-45 bg-current"></span>
+				<span class="absolute left-0 top-1/2 block h-px w-5 -translate-y-1/2 -rotate-45 bg-current"></span>
+			</span>
+		</button>
+	</div>
+
+	<nav class="mt-20 grid gap-5" aria-label="Mobile Navigation">
+		<a href="/" class={mobileLinkClass} data-menu-link>Start</a>
+		<a href="/leistungen" class={mobileLinkClass} data-menu-link>Leistungen</a>
+		<a href="/ueber-uns" class={mobileLinkClass} data-menu-link>Über uns</a>
+		<a href="/kontakt" class={mobileLinkClass} data-menu-link>Kontakt</a>
+		<a href="/kontakt" class={mobileButtonClass} data-menu-link>Termin vereinbaren</a>
+	</nav>
+</div>
+
+<script>
+	const menu = document.querySelector('[data-mobile-menu]');
+	const openButton = document.querySelector('[data-menu-open]');
+	const closeButton = document.querySelector('[data-menu-close]');
+	const menuLinks = document.querySelectorAll('[data-menu-link]');
+
+	if (menu instanceof HTMLElement && openButton instanceof HTMLButtonElement) {
+		const openMenu = () => {
+			menu.classList.remove('hidden');
+			openButton.setAttribute('aria-expanded', 'true');
+			document.documentElement.classList.add('overflow-hidden');
+		};
+
+		const closeMenu = () => {
+			menu.classList.add('hidden');
+			openButton.setAttribute('aria-expanded', 'false');
+			document.documentElement.classList.remove('overflow-hidden');
+		};
+
+		openButton.addEventListener('click', openMenu);
+		closeButton?.addEventListener('click', closeMenu);
+		menuLinks.forEach((link) => link.addEventListener('click', closeMenu));
+	}
+</script>

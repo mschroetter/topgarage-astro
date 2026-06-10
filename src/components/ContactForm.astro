@@ -1,0 +1,60 @@
+<section class="bg-background px-6 py-section sm:px-10 lg:px-16">
+	<div class="mx-auto grid max-w-7xl gap-16 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-24">
+		<div>
+			<p class="mb-6 text-xs font-semibold uppercase tracking-[0.28em] text-text-secondary sm:text-sm">
+				NACHRICHT
+			</p>
+			<h2 class="max-w-3xl text-[clamp(2.7rem,6.3vw,5.85rem)] font-semibold leading-[0.94] tracking-normal text-text">
+				Schreiben Sie uns.
+			</h2>
+			<p class="mt-8 max-w-xl text-lg leading-8 text-text-secondary">
+				Wir melden uns so bald wie möglich persönlich bei Ihnen.
+			</p>
+		</div>
+
+		<form class="grid gap-5" action="#" method="post">
+			<label class="grid gap-2">
+				<span class="text-sm font-semibold text-text">Name</span>
+				<input
+					class="h-16 rounded-[28px] border border-line bg-card px-6 text-base text-text outline-none transition-none placeholder:text-text-secondary/70 focus:border-text/30"
+					type="text"
+					name="name"
+					autocomplete="name"
+				/>
+			</label>
+			<label class="grid gap-2">
+				<span class="text-sm font-semibold text-text">Telefonnummer</span>
+				<input
+					class="h-16 rounded-[28px] border border-line bg-card px-6 text-base text-text outline-none transition-none placeholder:text-text-secondary/70 focus:border-text/30"
+					type="tel"
+					name="phone"
+					autocomplete="tel"
+				/>
+			</label>
+			<label class="grid gap-2">
+				<span class="text-sm font-semibold text-text">E-Mail</span>
+				<input
+					class="h-16 rounded-[28px] border border-line bg-card px-6 text-base text-text outline-none transition-none placeholder:text-text-secondary/70 focus:border-text/30"
+					type="email"
+					name="email"
+					autocomplete="email"
+				/>
+			</label>
+			<label class="grid gap-2">
+				<span class="text-sm font-semibold text-text">Nachricht</span>
+				<textarea
+					class="min-h-48 rounded-[28px] border border-line bg-card px-6 py-5 text-base text-text outline-none transition-none placeholder:text-text-secondary/70 focus:border-text/30"
+					name="message"
+				></textarea>
+			</label>
+			<div class="mt-3">
+				<button
+					class="primary-button-hover inline-flex h-12 items-center justify-center rounded-pill bg-text px-7 text-sm font-semibold text-card hover:bg-text/90 hover:text-card sm:h-14 sm:px-8"
+					type="submit"
+				>
+					Nachricht senden
+				</button>
+			</div>
+		</form>
+	</div>
+</section>

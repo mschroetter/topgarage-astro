@@ -1,0 +1,105 @@
+<section class="about-section relative overflow-hidden bg-[#050505] px-6 py-section sm:px-10 lg:px-16">
+	<div class="about-bg-layer absolute inset-0 bg-background" aria-hidden="true"></div>
+	<div class="relative z-10 mx-auto grid max-w-7xl items-center gap-16 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:gap-24">
+		<div class="aspect-[4/3] overflow-hidden rounded-[32px] bg-card">
+			<img
+				class="h-full w-full object-cover object-center"
+				src="/images/team.jpg"
+				alt="Team von TopGarage in Meran-Sinich"
+				loading="eager"
+				width="2560"
+				height="1707"
+				decoding="async"
+			/>
+		</div>
+
+		<div class="about-copy">
+			<p class="mb-6 text-xs font-semibold uppercase tracking-[0.28em] sm:text-sm">
+				ÜBER TOPGARAGE
+			</p>
+			<h2 class="max-w-3xl text-[clamp(2.3rem,5.1vw,4.85rem)] font-semibold leading-[0.98] tracking-normal">
+				Seit 1989.<br />
+				Für Meran.
+			</h2>
+			<p class="mt-8 max-w-xl text-lg leading-8">
+				Seit über drei Jahrzehnten stehen wir für zuverlässigen Service, modernes Werkstatt-Know-how und persönliche Beratung für Fahrzeuge aller Marken. Qualität, Präzision und Kundennähe stehen seit 1989 im Mittelpunkt unserer Arbeit.
+			</p>
+			<a
+				href="/ueber-uns"
+				class="primary-button-hover mt-10 inline-flex h-12 items-center justify-center rounded-pill bg-card px-7 text-sm font-semibold text-text hover:bg-card/90 hover:text-text sm:h-14 sm:px-8"
+			>
+				Mehr über uns
+			</a>
+		</div>
+	</div>
+</section>
+
+<style>
+	.about-section {
+		--about-bg-progress: 0;
+		--about-heading-color: #ffffff;
+		--about-muted-color: #bfc3c9;
+	}
+
+	.about-bg-layer {
+		opacity: var(--about-bg-progress);
+		pointer-events: none;
+		z-index: 0;
+	}
+
+	.about-copy {
+		color: var(--about-heading-color);
+	}
+
+	.about-copy p {
+		color: var(--about-muted-color);
+	}
+
+	.about-copy h2 {
+		color: var(--about-heading-color);
+	}
+
+</style>
+
+<script>
+	const aboutSection = document.querySelector('.about-section');
+
+	if (aboutSection instanceof HTMLElement) {
+		let ticking = false;
+
+		const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
+		const mix = (from, to, progress) => Math.round(from + (to - from) * progress);
+
+		const setAboutProgress = (progress) => {
+			const colorProgress = clamp((progress - 0.35) / 0.65, 0, 1);
+			const headingColor = `rgb(${mix(255, 17, colorProgress)}, ${mix(255, 17, colorProgress)}, ${mix(255, 17, colorProgress)})`;
+			const mutedColor = `rgb(${mix(191, 107, colorProgress)}, ${mix(195, 114, colorProgress)}, ${mix(201, 128, colorProgress)})`;
+
+			aboutSection.style.setProperty('--about-bg-progress', progress.toFixed(3));
+			aboutSection.style.setProperty('--about-heading-color', headingColor);
+			aboutSection.style.setProperty('--about-muted-color', mutedColor);
+		};
+
+		const updateAboutProgress = () => {
+			const rect = aboutSection.getBoundingClientRect();
+			const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+			const start = viewportHeight * 0.7;
+			const end = viewportHeight * 0.05;
+			const progress = clamp((start - rect.top) / (start - end), 0, 1);
+
+			setAboutProgress(progress);
+			ticking = false;
+		};
+
+		const requestUpdate = () => {
+			if (!ticking) {
+				window.requestAnimationFrame(updateAboutProgress);
+				ticking = true;
+			}
+		};
+
+		updateAboutProgress();
+		window.addEventListener('scroll', requestUpdate, { passive: true });
+		window.addEventListener('resize', requestUpdate);
+	}
+</script>
