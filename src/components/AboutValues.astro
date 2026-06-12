@@ -1,22 +1,26 @@
+---
+import type { Translations } from '../i18n';
+
+interface Props {
+	t: Translations['aboutPage']['values'];
+}
+
+const { t } = Astro.props;
+---
+
 <section class="bg-[#050505] px-6 py-section text-card sm:px-10 lg:px-16">
 	<div class="mx-auto grid max-w-7xl gap-16 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-24">
 		<div>
 			<p class="mb-6 text-xs font-semibold uppercase tracking-[0.28em] text-card/62 sm:text-sm">
-				WAS UNS AUSMACHT
+				{t.eyebrow}
 			</p>
 			<h2 class="max-w-3xl text-[clamp(2.7rem,6.3vw,5.85rem)] font-semibold leading-[0.94] tracking-normal">
-				Ein Team.<br />
-				Ein Anspruch.
+				<Fragment set:html={t.headline} />
 			</h2>
 		</div>
 
 		<div class="grid gap-10 text-lg leading-8 text-card/68">
-			<p>
-				Was 1989 als Zwei-Mann-Betrieb begann, ist heute ein erfahrenes Team für Werkstatt, Karosserie, Autoglas und Fahrzeughandel in Meran-Sinich.
-			</p>
-			<p>
-				Wir setzen auf klare Kommunikation, sorgfältige Arbeit und eine Beratung, die zu Ihrem Fahrzeug und Ihrer Mobilität passt.
-			</p>
+			{t.texts.map((text) => <p>{text}</p>)}
 		</div>
 	</div>
 </section>

@@ -1,11 +1,17 @@
 ---
 import logo from '../images/logo.png';
+import { getTranslations } from '../i18n';
+import { languageLinks, route, type Locale, type PageKey } from '../i18n/routes';
 
 interface Props {
 	theme?: 'dark' | 'light';
+	locale?: Locale;
+	page?: PageKey;
 }
 
-const { theme = 'dark' } = Astro.props;
+const { theme = 'dark', locale = 'de', page = 'home' } = Astro.props;
+const t = getTranslations(locale);
+const links = languageLinks(page);
 const navClass =
 	theme === 'dark'
 		? 'hidden items-center gap-9 text-sm font-medium text-card/80 md:flex'
@@ -31,11 +37,13 @@ const mobileButtonClass =
 	theme === 'dark'
 		? 'mt-10 inline-flex h-14 items-center justify-center rounded-pill bg-card px-8 text-sm font-semibold text-text'
 		: 'mt-10 inline-flex h-14 items-center justify-center rounded-pill bg-text px-8 text-sm font-semibold text-card';
+const languageClass = theme === 'dark' ? 'text-card/55 hover:text-card' : 'text-text-secondary hover:text-text';
+const activeLanguageClass = theme === 'dark' ? 'text-card' : 'text-text';
 ---
 
 <header class="absolute inset-x-0 top-0 z-10 px-6 py-8 sm:px-10 lg:px-16 lg:py-9">
 	<div class="flex items-center justify-between gap-8">
-		<a href="/" class="inline-flex items-center">
+		<a href={route(locale, 'home')} class="inline-flex items-center">
 			<img
 				class="h-[24px] w-auto object-contain lg:h-[28px]"
 				src={logo.src}
@@ -46,15 +54,33 @@ const mobileButtonClass =
 			/>
 		</a>
 		<div class="flex items-center gap-4 sm:gap-7">
-			<nav class={navClass} aria-label="Hauptnavigation">
-				<a href="/leistungen" class={navLinkClass}>Leistungen</a>
-				<a href="/ueber-uns" class={navLinkClass}>Über uns</a>
-				<a href="/kontakt" class={navLinkClass}>Kontakt</a>
+			<nav class={navClass} aria-label={t.nav.aria}>
+				<a href={route(locale, 'services')} class={navLinkClass}>{t.nav.services}</a>
+				<a href={route(locale, 'about')} class={navLinkClass}>{t.nav.about}</a>
+				<a href={route(locale, 'contact')} class={navLinkClass}>{t.nav.contact}</a>
 			</nav>
-			<a href="/kontakt" class={`${buttonClass} hidden md:inline-flex`}>
-				Termin
+			<div class="hidden items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] md:flex">
+				{
+					links.map((link, index) => (
+						<>
+							{index > 0 && <span class={theme === 'dark' ? 'text-card/30' : 'text-text-secondary/40'}>|</span>}
+							<a
+								href={link.href}
+								class={`${link.locale === locale ? activeLanguageClass : languageClass} transition-none`}
+								aria-current={link.locale === locale ? 'page' : undefined}
+								data-language-link
+								data-language={link.locale}
+							>
+								{link.label}
+							</a>
+						</>
+					))
+				}
+			</div>
+			<a href={route(locale, 'contact')} class={`${buttonClass} hidden md:inline-flex`}>
+				{t.nav.appointment}
 			</a>
-			<button class={burgerClass} type="button" aria-label="Menü öffnen" aria-expanded="false" data-menu-open>
+			<button class={burgerClass} type="button" aria-label={t.nav.open} aria-expanded="false" data-menu-open>
 				<span class="grid gap-1.5">
 					<span class="block h-px w-5 bg-current"></span>
 					<span class="block h-px w-5 bg-current"></span>
@@ -66,7 +92,7 @@ const mobileButtonClass =
 
 <div class={mobileMenuClass} data-mobile-menu>
 	<div class="flex items-center justify-between">
-		<a href="/" class="inline-flex items-center" data-menu-link>
+		<a href={route(locale, 'home')} class="inline-flex items-center" data-menu-link>
 			<img
 				class="h-[24px] w-auto object-contain"
 				src={logo.src}
@@ -79,7 +105,7 @@ const mobileButtonClass =
 		<button
 			class={theme === 'dark' ? 'inline-flex h-11 w-11 items-center justify-center rounded-full border border-card/35 text-card' : 'inline-flex h-11 w-11 items-center justify-center rounded-full border border-text/20 text-text'}
 			type="button"
-			aria-label="Menü schließen"
+			aria-label={t.nav.close}
 			data-menu-close
 		>
 			<span class="relative block h-5 w-5">
@@ -89,12 +115,31 @@ const mobileButtonClass =
 		</button>
 	</div>
 
-	<nav class="mt-20 grid gap-5" aria-label="Mobile Navigation">
-		<a href="/" class={mobileLinkClass} data-menu-link>Start</a>
-		<a href="/leistungen" class={mobileLinkClass} data-menu-link>Leistungen</a>
-		<a href="/ueber-uns" class={mobileLinkClass} data-menu-link>Über uns</a>
-		<a href="/kontakt" class={mobileLinkClass} data-menu-link>Kontakt</a>
-		<a href="/kontakt" class={mobileButtonClass} data-menu-link>Termin vereinbaren</a>
+	<nav class="mt-20 grid gap-5" aria-label={t.nav.mobileAria}>
+		<a href={route(locale, 'home')} class={mobileLinkClass} data-menu-link>{t.nav.home}</a>
+		<a href={route(locale, 'services')} class={mobileLinkClass} data-menu-link>{t.nav.services}</a>
+		<a href={route(locale, 'about')} class={mobileLinkClass} data-menu-link>{t.nav.about}</a>
+		<a href={route(locale, 'contact')} class={mobileLinkClass} data-menu-link>{t.nav.contact}</a>
+		<div class="mt-6 flex gap-4 text-sm font-semibold uppercase tracking-[0.18em]">
+			{
+				links.map((link, index) => (
+					<>
+						{index > 0 && <span class={theme === 'dark' ? 'text-card/30' : 'text-text-secondary/40'}>|</span>}
+						<a
+							href={link.href}
+							class={`${link.locale === locale ? activeLanguageClass : languageClass} transition-none`}
+							aria-current={link.locale === locale ? 'page' : undefined}
+							data-menu-link
+							data-language-link
+							data-language={link.locale}
+						>
+							{link.label}
+						</a>
+					</>
+				))
+			}
+		</div>
+		<a href={route(locale, 'contact')} class={mobileButtonClass} data-menu-link>{t.nav.appointmentLong}</a>
 	</nav>
 </div>
 
@@ -121,4 +166,18 @@ const mobileButtonClass =
 		closeButton?.addEventListener('click', closeMenu);
 		menuLinks.forEach((link) => link.addEventListener('click', closeMenu));
 	}
+
+	document.querySelectorAll('[data-language-link]').forEach((link) => {
+		link.addEventListener('click', () => {
+			const language = link instanceof HTMLElement ? link.dataset.language : null;
+
+			if (language) {
+				try {
+					localStorage.setItem('language', language);
+				} catch {
+					// Ignore storage errors so language navigation still works.
+				}
+			}
+		});
+	});
 </script>

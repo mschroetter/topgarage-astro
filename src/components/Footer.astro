@@ -1,7 +1,19 @@
+---
+import { getTranslations } from '../i18n';
+import { route, type Locale } from '../i18n/routes';
+
+interface Props {
+	locale?: Locale;
+}
+
+const { locale = 'de' } = Astro.props;
+const t = getTranslations(locale);
+---
+
 <footer class="relative overflow-hidden border-t border-white/[0.08] bg-[#050505] px-6 pb-[clamp(6rem,12vw,12rem)] pt-[clamp(4rem,7vw,7rem)] text-card sm:px-10 lg:px-16">
 	<div class="relative z-10 mx-auto grid max-w-7xl gap-14 lg:grid-cols-[minmax(0,1fr)_minmax(280px,0.45fr)] lg:gap-24">
 		<div>
-			<a href="/" class="text-sm font-semibold uppercase tracking-[0.24em] text-card transition-none hover:text-card">
+			<a href={route(locale, 'home')} class="text-sm font-semibold uppercase tracking-[0.24em] text-card transition-none hover:text-card">
 				TopGarage
 			</a>
 			<div class="mt-9 space-y-5 text-base leading-7 text-card/62">
@@ -16,12 +28,12 @@
 			</div>
 		</div>
 
-		<nav aria-label="Footer Navigation">
+		<nav aria-label={t.footer.aria}>
 			<ul class="grid gap-4 text-base font-medium text-card/72">
-				<li><a href="/leistungen" class="transition-none hover:text-card">Leistungen</a></li>
-				<li><a href="/ueber-uns" class="transition-none hover:text-card">Über uns</a></li>
-				<li><a href="/kontakt" class="transition-none hover:text-card">Kontakt</a></li>
-				<li><a href="/kontakt" class="transition-none hover:text-card">Termin</a></li>
+				<li><a href={route(locale, 'services')} class="transition-none hover:text-card">{t.footer.services}</a></li>
+				<li><a href={route(locale, 'about')} class="transition-none hover:text-card">{t.footer.about}</a></li>
+				<li><a href={route(locale, 'contact')} class="transition-none hover:text-card">{t.footer.contact}</a></li>
+				<li><a href={route(locale, 'contact')} class="transition-none hover:text-card">{t.footer.appointment}</a></li>
 			</ul>
 		</nav>
 	</div>
@@ -29,8 +41,8 @@
 	<div class="relative z-10 mx-auto mt-[clamp(4rem,8vw,8rem)] flex max-w-7xl flex-col gap-4 text-xs font-medium text-card/42 sm:flex-row sm:items-center sm:justify-between">
 		<p>© TopGarage</p>
 		<div class="flex gap-6">
-			<a href="/impressum" class="transition-none hover:text-card/70">Impressum</a>
-			<a href="/datenschutz" class="transition-none hover:text-card/70">Datenschutz</a>
+			<a href={route('de', 'imprint')} class="transition-none hover:text-card/70">{t.footer.imprint}</a>
+			<a href={route('de', 'privacy')} class="transition-none hover:text-card/70">{t.footer.privacy}</a>
 		</div>
 	</div>
 

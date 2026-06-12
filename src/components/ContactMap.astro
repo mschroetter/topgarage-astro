@@ -1,10 +1,20 @@
+---
+import type { Translations } from '../i18n';
+
+interface Props {
+	t: Translations['contactPage']['map'];
+}
+
+const { t } = Astro.props;
+---
+
 <section class="bg-background px-6 py-section sm:px-10 lg:px-16">
 	<div class="mx-auto max-w-7xl">
 		<div class="h-[380px] w-full overflow-hidden rounded-[32px] bg-line sm:h-[420px] lg:h-[520px]">
 			<iframe
 				class="h-full w-full border-0"
 				src="https://www.google.com/maps?q=TopGarage%2C%20Reichstra%C3%9Fe%2063%2C%2039012%20Meran-Sinich%2C%20Italien&output=embed"
-				title="Google Maps Karte TopGarage Meran-Sinich"
+				title={t.title}
 				loading="lazy"
 				referrerpolicy="no-referrer-when-downgrade"
 				allowfullscreen
@@ -17,7 +27,7 @@
 				rel="noopener noreferrer"
 				class="primary-button-hover inline-flex h-12 items-center justify-center rounded-pill bg-text px-7 text-sm font-semibold text-card hover:bg-text/90 hover:text-card sm:h-14 sm:px-8"
 			>
-				Route planen
+				{t.route}
 			</a>
 		</div>
 	</div>

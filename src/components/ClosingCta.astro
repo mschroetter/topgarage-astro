@@ -1,3 +1,15 @@
+---
+import { route, type Locale } from '../i18n/routes';
+import type { Translations } from '../i18n';
+
+interface Props {
+	locale?: Locale;
+	t: Translations['home']['cta'];
+}
+
+const { locale = 'de', t } = Astro.props;
+---
+
 <section class="closing-cta bg-background px-6 py-[clamp(5rem,10vw,9rem)] text-card sm:px-10 lg:px-16">
 	<div class="relative isolate mx-auto flex min-h-[75vh] max-w-[1600px] overflow-hidden rounded-[32px] bg-text px-6 py-24 sm:min-h-[82vh] sm:px-10 lg:px-16">
 		<img
@@ -16,20 +28,20 @@
 		<div class="mx-auto flex w-full max-w-7xl items-center justify-center">
 			<div class="cta-copy max-w-5xl text-center">
 				<p class="mb-6 text-xs font-semibold uppercase tracking-[0.28em] text-card/75 sm:text-sm">
-					TOP GARAGE MERAN-SINICH
+					{t.eyebrow}
 				</p>
 				<h2 class="text-[clamp(2.8rem,6.4vw,6.25rem)] font-semibold leading-[0.98] tracking-normal text-card">
-					Bereit für Ihren nächsten Werkstatttermin?
+					{t.headline}
 				</h2>
 				<p class="mx-auto mt-8 max-w-2xl text-base leading-7 text-card/82 sm:text-xl sm:leading-8">
-					Werkstatt, Karosserie und Autoglas – persönlich, präzise und zuverlässig in Meran-Sinich.
+					{t.text}
 				</p>
 				<div class="mt-10">
 					<a
-						href="/kontakt"
+						href={route(locale, 'contact')}
 						class="primary-button-hover inline-flex h-12 items-center justify-center rounded-pill bg-card px-7 text-sm font-semibold text-text hover:bg-card/90 hover:text-text sm:h-14 sm:px-8"
 					>
-						Termin vereinbaren
+						{t.button}
 					</a>
 				</div>
 			</div>

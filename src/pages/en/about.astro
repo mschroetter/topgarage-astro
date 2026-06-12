@@ -1,0 +1,22 @@
+---
+import AboutHero from '../../components/AboutHero.astro';
+import AboutStats from '../../components/AboutStats.astro';
+import AboutStory from '../../components/AboutStory.astro';
+import AboutValues from '../../components/AboutValues.astro';
+import Footer from '../../components/Footer.astro';
+import Layout from '../../layouts/Layout.astro';
+import { getTranslations } from '../../i18n';
+
+const locale = 'en';
+const t = getTranslations(locale);
+---
+
+<Layout lang={locale} title={t.meta.about.title} description={t.meta.about.description} preloadImage="/images/team.jpg">
+	<main class="bg-background text-text">
+		<AboutHero locale={locale} page="about" t={t.aboutPage.hero} />
+		<AboutStory t={t.aboutPage.story} />
+		<AboutValues t={t.aboutPage.values} />
+		<AboutStats t={t.aboutPage.stats} />
+	</main>
+	<Footer locale={locale} />
+</Layout>

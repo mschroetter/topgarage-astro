@@ -1,8 +1,18 @@
+---
+import type { Translations } from '../i18n';
+
+interface Props {
+	t: Translations['contactPage']['info'];
+}
+
+const { t } = Astro.props;
+---
+
 <section class="bg-background px-6 py-section sm:px-10 lg:px-16">
 	<div class="mx-auto grid max-w-7xl gap-16 lg:grid-cols-2 lg:gap-24">
 		<div class="space-y-12">
 			<div>
-				<p class="mb-4 text-xs font-semibold uppercase tracking-[0.28em] text-text-secondary">Adresse</p>
+				<p class="mb-4 text-xs font-semibold uppercase tracking-[0.28em] text-text-secondary">{t.addressLabel}</p>
 				<p class="text-xl leading-8 text-text">
 					TopGarage<br />
 					Reichstraße 63<br />
@@ -11,14 +21,14 @@
 			</div>
 
 			<div>
-				<p class="mb-4 text-xs font-semibold uppercase tracking-[0.28em] text-text-secondary">Telefon</p>
+				<p class="mb-4 text-xs font-semibold uppercase tracking-[0.28em] text-text-secondary">{t.phoneLabel}</p>
 				<a href="tel:+390473449835" class="text-xl leading-8 text-text transition-none hover:text-text">
 					+39 0473 449 835
 				</a>
 			</div>
 
 			<div>
-				<p class="mb-4 text-xs font-semibold uppercase tracking-[0.28em] text-text-secondary">E-Mail</p>
+				<p class="mb-4 text-xs font-semibold uppercase tracking-[0.28em] text-text-secondary">{t.emailLabel}</p>
 				<a href="mailto:info@topgarage.it" class="text-xl leading-8 text-text transition-none hover:text-text">
 					info@topgarage.it
 				</a>
@@ -27,11 +37,10 @@
 
 		<div>
 			<p class="mb-4 text-xs font-semibold uppercase tracking-[0.28em] text-text-secondary">
-				Öffnungszeiten
+				{t.openingLabel}
 			</p>
 			<p class="text-xl leading-8 text-text">
-				Mo–Fr: 08:00–12:00 / 14:00–18:00<br />
-				Sa: nach Vereinbarung
+				<Fragment set:html={t.opening} />
 			</p>
 
 			<div class="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
@@ -39,19 +48,19 @@
 					href="tel:+390473449835"
 					class="primary-button-hover inline-flex h-12 items-center justify-center rounded-pill bg-text px-7 text-sm font-semibold text-card hover:bg-text/90 hover:text-card sm:h-14 sm:px-8"
 				>
-					Anrufen
+					{t.call}
 				</a>
 				<a
 					href="mailto:info@topgarage.it"
 					class="inline-flex h-12 items-center justify-center rounded-pill border border-text/20 bg-transparent px-7 text-sm font-semibold text-text transition-none hover:border-text/40 hover:bg-transparent hover:text-text sm:h-14 sm:px-8"
 				>
-					E-Mail schreiben
+					{t.email}
 				</a>
 				<a
 					href="https://www.google.com/maps/search/?api=1&query=TopGarage%20Reichstra%C3%9Fe%2063%2039012%20Meran-Sinich"
 					class="inline-flex h-12 items-center justify-center rounded-pill border border-text/20 bg-transparent px-7 text-sm font-semibold text-text transition-none hover:border-text/40 hover:bg-transparent hover:text-text sm:h-14 sm:px-8"
 				>
-					Route planen
+					{t.route}
 				</a>
 			</div>
 		</div>

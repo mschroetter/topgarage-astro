@@ -1,17 +1,29 @@
+---
+import { route, type Locale } from '../i18n/routes';
+import type { Translations } from '../i18n';
+
+interface Props {
+	locale?: Locale;
+	t: Translations['servicesPage']['contact'];
+}
+
+const { locale = 'de', t } = Astro.props;
+---
+
 <section class="px-6 py-[clamp(5rem,10vw,10rem)] sm:px-10 lg:px-16">
 	<div class="mx-auto max-w-7xl">
 		<div class="max-w-[900px]">
 			<p class="mb-6 text-xs font-semibold uppercase tracking-[0.28em] text-text-secondary sm:text-sm">
-				NOCH FRAGEN?
+				{t.eyebrow}
 			</p>
 			<h2 class="text-[clamp(2.8rem,5.6vw,5.5rem)] font-semibold leading-[1.08] tracking-normal text-text">
-				Wir beraten Sie gerne persönlich und finden die passende Lösung für Ihr Fahrzeug.
+				{t.headline}
 			</h2>
 			<a
-				href="/kontakt"
+				href={route(locale, 'contact')}
 				class="primary-button-hover mt-10 inline-flex h-12 items-center justify-center rounded-pill bg-text px-7 text-sm font-semibold text-card hover:bg-text/90 hover:text-card sm:h-14 sm:px-8"
 			>
-				Termin vereinbaren
+				{t.button}
 			</a>
 		</div>
 	</div>

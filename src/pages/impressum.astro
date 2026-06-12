@@ -2,14 +2,15 @@
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
 import Layout from '../layouts/Layout.astro';
+import { getTranslations } from '../i18n';
+
+const locale = 'de';
+const t = getTranslations(locale);
 ---
 
-<Layout
-	title="Impressum · Top Garage Meran-Sinich"
-	description="Impressum und rechtliche Informationen zu Top Garage OHG in Meran-Sinich."
->
+<Layout lang={locale} title={t.meta.imprint.title} description={t.meta.imprint.description}>
 	<main class="relative bg-background text-text">
-		<Header theme="light" />
+		<Header theme="light" locale={locale} page="imprint" />
 
 		<section class="px-6 pb-[clamp(5rem,9vw,9rem)] pt-[clamp(7rem,12vw,12rem)] sm:px-10 lg:px-16">
 			<div class="mx-auto max-w-7xl">
@@ -114,5 +115,5 @@ import Layout from '../layouts/Layout.astro';
 			</div>
 		</section>
 	</main>
-	<Footer />
+	<Footer locale={locale} />
 </Layout>

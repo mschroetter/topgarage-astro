@@ -6,17 +6,21 @@ import Hero from '../components/Hero.astro';
 import IntroSection from '../components/IntroSection.astro';
 import Layout from '../layouts/Layout.astro';
 import ServicesTeaser from '../components/ServicesTeaser.astro';
+import { getTranslations } from '../i18n';
 
+const locale = 'de';
+const t = getTranslations(locale);
 ---
 
 <Layout
-	title="Top Garage · Meran-Sinich"
-	description="Top Garage in Meran-Sinich: Werkstatt, Karosserie, Scheibenwechsel und Fahrzeughandel mit persönlichem Service seit 1989."
+	lang={locale}
+	title={t.meta.home.title}
+	description={t.meta.home.description}
 >
-	<Hero />
-	<IntroSection />
-	<ServicesTeaser />
-	<AboutSection />
-	<ClosingCta />
-	<Footer />
+	<Hero locale={locale} page="home" t={t.home.hero} />
+	<IntroSection t={t.home.intro} />
+	<ServicesTeaser locale={locale} t={t.home.services} />
+	<AboutSection locale={locale} t={t.home.about} />
+	<ClosingCta locale={locale} t={t.home.cta} />
+	<Footer locale={locale} />
 </Layout>

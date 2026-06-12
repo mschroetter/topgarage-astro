@@ -1,12 +1,22 @@
 ---
 import Header from './Header.astro';
+import type { Translations } from '../i18n';
+import type { Locale, PageKey } from '../i18n/routes';
+
+interface Props {
+	locale?: Locale;
+	page?: PageKey;
+	t: Translations['aboutPage']['hero'];
+}
+
+const { locale = 'de', page = 'about', t } = Astro.props;
 ---
 
 <section class="relative isolate min-h-[78vh] overflow-hidden bg-text text-card">
 	<img
 		class="absolute inset-0 -z-20 h-full w-full object-cover"
 		src="/images/team.jpg"
-		alt="Team von TopGarage in Meran-Sinich"
+		alt={t.imageAlt}
 		loading="eager"
 		fetchpriority="high"
 		width="2560"
@@ -17,19 +27,18 @@ import Header from './Header.astro';
 	<div class="absolute inset-0 -z-10 bg-black/40"></div>
 	<div class="absolute inset-0 -z-10 bg-linear-to-b from-black/10 via-black/20 to-black/60"></div>
 
-	<Header />
+	<Header locale={locale} page={page} />
 
 	<div class="flex min-h-[78vh] items-end px-6 pb-16 pt-28 sm:px-10 sm:pb-20 lg:px-16 lg:pb-14">
 		<div class="max-w-5xl">
 			<p class="mb-5 text-xs font-semibold uppercase tracking-[0.28em] text-card/75 sm:text-sm">
-				ÜBER TOPGARAGE
+				{t.eyebrow}
 			</p>
 			<h1 class="max-w-5xl text-[clamp(2.875rem,8.8vw,6.75rem)] font-semibold leading-[0.94] tracking-normal text-card">
-				Seit 1989.<br />
-				Für Meran.
+				<Fragment set:html={t.headline} />
 			</h1>
 			<p class="mt-8 max-w-2xl text-lg leading-8 text-card/82">
-				Seit über drei Jahrzehnten stehen wir für zuverlässigen Service, modernes Werkstatt-Know-how und persönliche Beratung für Fahrzeuge aller Marken.
+				{t.text}
 			</p>
 		</div>
 	</div>

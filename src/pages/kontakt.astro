@@ -5,17 +5,22 @@ import ContactInfo from '../components/ContactInfo.astro';
 import ContactMap from '../components/ContactMap.astro';
 import Footer from '../components/Footer.astro';
 import Layout from '../layouts/Layout.astro';
+import { getTranslations } from '../i18n';
+
+const locale = 'de';
+const t = getTranslations(locale);
 ---
 
 <Layout
-	title="Kontakt · Top Garage Meran-Sinich"
-	description="Kontakt zu Top Garage in Meran-Sinich: Adresse, Telefon, E-Mail, Öffnungszeiten, Route und Kontaktformular."
+	lang={locale}
+	title={t.meta.contact.title}
+	description={t.meta.contact.description}
 >
 	<main class="bg-background text-text">
-		<ContactHero />
-		<ContactInfo />
-		<ContactForm />
-		<ContactMap />
+		<ContactHero locale={locale} page="contact" t={t.contactPage.hero} />
+		<ContactInfo t={t.contactPage.info} />
+		<ContactForm t={t.contactPage.form} />
+		<ContactMap t={t.contactPage.map} />
 	</main>
-	<Footer />
+	<Footer locale={locale} />
 </Layout>

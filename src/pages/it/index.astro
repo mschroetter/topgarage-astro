@@ -1,0 +1,22 @@
+---
+import AboutSection from '../../components/AboutSection.astro';
+import ClosingCta from '../../components/ClosingCta.astro';
+import Footer from '../../components/Footer.astro';
+import Hero from '../../components/Hero.astro';
+import IntroSection from '../../components/IntroSection.astro';
+import Layout from '../../layouts/Layout.astro';
+import ServicesTeaser from '../../components/ServicesTeaser.astro';
+import { getTranslations } from '../../i18n';
+
+const locale = 'it';
+const t = getTranslations(locale);
+---
+
+<Layout lang={locale} title={t.meta.home.title} description={t.meta.home.description}>
+	<Hero locale={locale} page="home" t={t.home.hero} />
+	<IntroSection t={t.home.intro} />
+	<ServicesTeaser locale={locale} t={t.home.services} />
+	<AboutSection locale={locale} t={t.home.about} />
+	<ClosingCta locale={locale} t={t.home.cta} />
+	<Footer locale={locale} />
+</Layout>

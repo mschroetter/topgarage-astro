@@ -5,17 +5,19 @@ interface Props {
 	title?: string;
 	description?: string;
 	preloadImage?: string;
+	lang?: string;
 }
 
 const {
 	title = 'Topgarage Astro',
 	description = 'Top Garage Meran-Sinich: Werkstatt, Karosserie, Autoglas und Fahrzeughandel mit persönlicher Beratung.',
 	preloadImage,
+	lang = 'de',
 } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="de">
+<html lang={lang}>
 	<head>
 		<meta charset="utf-8" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -23,6 +25,63 @@ const {
 		<meta name="viewport" content="width=device-width" />
 		<meta name="description" content={description} />
 		<meta name="generator" content={Astro.generator} />
+		<script is:inline>
+			(() => {
+				const supportedLanguages = ['de', 'it', 'en'];
+				const pageMap = {
+					'/': { de: '/', it: '/it', en: '/en' },
+					'/leistungen': { de: '/leistungen', it: '/it/servizi', en: '/en/services' },
+					'/ueber-uns': { de: '/ueber-uns', it: '/it/chi-siamo', en: '/en/about' },
+					'/kontakt': { de: '/kontakt', it: '/it/contatti', en: '/en/contact' },
+				};
+
+				const normalizePath = (path) => path.replace(/\/+$/, '') || '/';
+				const currentPath = normalizePath(window.location.pathname);
+
+				if (currentPath === '/it' || currentPath.startsWith('/it/') || currentPath === '/en' || currentPath.startsWith('/en/')) {
+					return;
+				}
+
+				if (!pageMap[currentPath]) {
+					return;
+				}
+
+				const normalizeLanguage = (language) => {
+					const value = String(language || '').toLowerCase();
+
+					if (value.startsWith('de')) return 'de';
+					if (value.startsWith('it')) return 'it';
+					if (value.startsWith('en')) return 'en';
+
+					return null;
+				};
+
+				const getStoredLanguage = () => {
+					try {
+						return localStorage.getItem('language');
+					} catch {
+						return null;
+					}
+				};
+
+				let language = normalizeLanguage(getStoredLanguage());
+
+				if (!language) {
+					const browserLanguages = navigator.languages?.length ? navigator.languages : [navigator.language];
+					language = browserLanguages.map(normalizeLanguage).find(Boolean) || 'de';
+				}
+
+				if (!supportedLanguages.includes(language) || language === 'de') {
+					return;
+				}
+
+				const targetPath = pageMap[currentPath][language];
+
+				if (targetPath && targetPath !== currentPath) {
+					window.location.replace(`${targetPath}${window.location.search}${window.location.hash}`);
+				}
+			})();
+		</script>
 		{preloadImage && <link rel="preload" as="image" href={preloadImage} fetchpriority="high" />}
 		<title>{title}</title>
 	</head>

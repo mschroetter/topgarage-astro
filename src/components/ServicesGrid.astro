@@ -1,66 +1,12 @@
 ---
 import ServicesCard from './ServicesCard.astro';
+import type { Translations } from '../i18n';
 
-const services = [
-	{
-		title: 'KFZ-Service',
-		text: 'Zuverlässiger Service und präzise Wartung für Fahrzeuge aller Marken.',
-		image: '/images/service.jpg',
-		width: 2560,
-		height: 1707,
-		featured: true,
-	},
-	{
-		title: 'Karosserie',
-		text: 'Saubere Karosseriearbeiten mit Erfahrung, Präzision und Blick fürs Detail.',
-		image: '/images/karosserie.jpg',
-		width: 2560,
-		height: 1707,
-	},
-	{
-		title: 'Scheibenwechsel & Autoglas',
-		text: 'Reparatur und Austausch von Autoglas - schnell und präzise.',
-		image: '/images/autoglas.jpg',
-		width: 2560,
-		height: 1707,
-	},
-	{
-		title: 'Reifendienst & Elektronik',
-		text: 'Reifenservice, Diagnose und elektronische Systeme kompetent betreut.',
-		image: '/images/reifendienst.jpg',
-		width: 2257,
-		height: 2560,
-		featured: true,
-	},
-	{
-		title: 'Achsvermessung',
-		text: 'Exakte Vermessung für Fahrstabilität, Sicherheit und gleichmäßigen Reifenverschleiß.',
-		image: '/images/achsvermessung.jpg',
-		width: 2560,
-		height: 1707,
-	},
-	{
-		title: 'Revisionscenter',
-		text: 'Gründliche Kontrollen und technische Vorbereitung mit moderner Werkstatttechnik.',
-		image: '/images/revisionscenter.jpg',
-		width: 1707,
-		height: 2560,
-	},
-	{
-		title: 'Fahrzeughandel',
-		text: 'Ausgewählte Fahrzeuge und persönliche Beratung in Meran-Sinich.',
-		image: '/images/fahrzeughandel.jpg',
-		width: 1707,
-		height: 2560,
-	},
-	{
-		title: 'Persönliche Beratung',
-		text: 'Direkte Ansprechpartner und klare Empfehlungen für Ihr Fahrzeug.',
-		image: '/images/beratung.jpg',
-		width: 2560,
-		height: 1707,
-	},
-];
+interface Props {
+	items: Translations['servicesPage']['items'];
+}
+
+const { items: services } = Astro.props;
 ---
 
 <section class="px-6 py-section sm:px-10 lg:px-16">
